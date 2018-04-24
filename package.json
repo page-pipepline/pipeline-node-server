@@ -1,0 +1,54 @@
+{
+  "name": "pipeline-node-server",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "archiver": "^2.1.1",
+    "await-stream-ready": "^1.0.1",
+    "egg": "^2.2.1",
+    "egg-cors": "^2.0.0",
+    "egg-scripts": "^2.5.0",
+    "egg-validate": "^1.0.0",
+    "stream-wormhole": "^1.0.3",
+    "vue": "^2.5.15",
+    "vue-server-renderer": "^2.5.15"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.6",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.14.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^6.0.0",
+    "jsdoc": "^3.5.5",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-pipeline-node-server",
+    "stop": "egg-scripts stop --title=egg-server-pipeline-node-server",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "doc": "node_modules/apidoc/bin/apidoc -i app/controller -o app/public/docs",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT"
+}
