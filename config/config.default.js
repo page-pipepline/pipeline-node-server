@@ -12,11 +12,24 @@ module.exports = appInfo => {
     },
   };
 
-  config.middleware = [ 'bodyclothes' ];
+  config.middleware = [ 'staticCacheIgnore', 'bodyclothes' ];
   config.keys = appInfo.name + '_pipeline';
+
+  config.static = {
+    enable: true,
+    ignore: ctx => [ /public\/pipelines\/\d+\/server\/dist\/index\.html/ ].some(item => item.test(ctx.path)),
+  };
+
+  config.staticCacheIgnore = {
+    dontCache: [ /public\/pipelines\/\d+\/server\/dist\/index\.html/ ],
+  };
 
   config.security = {
     csrf: {
+      enable: false,
+    },
+    // 编辑中的的页面在 iframe 中浏览, 所以需要允许
+    xframe: {
       enable: false,
     },
   };
