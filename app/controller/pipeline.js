@@ -224,9 +224,31 @@ class EditController extends Controller {
     const { ctx, config } = this;
     const pageId = ctx.query.pageId;
     const templatepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId, 'server/config');
-    const schemaPath = path.join(templatepipelineDir, 'template-schemas.json');
+    const schemaPath = path.join(templatepipelineDir, 'components-schema.json');
     const schemaStr = fs.readFileSync(schemaPath, 'utf-8');
     const content = JSON.parse(schemaStr);
+    ctx.body = content;
+  }
+
+  async getLibraryComponentsInfo() {
+    const { ctx, config } = this;
+    const pageId = ctx.query.pageId;
+    const templatepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId, 'server/config');
+    const componentsInfoPath = path.join(templatepipelineDir, 'components-info.json');
+    const componentsInfoStr = fs.readFileSync(componentsInfoPath, 'utf-8');
+    const content = JSON.parse(componentsInfoStr);
+
+    ctx.body = content;
+  }
+
+  async getComponentsDefaultData() {
+    const { ctx, config } = this;
+    const pageId = ctx.query.pageId;
+    const templatepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId, 'server/config');
+    const componentsDefaultDataPath = path.join(templatepipelineDir, 'components-default-data.json');
+    const componentsDefaultDataStr = fs.readFileSync(componentsDefaultDataPath, 'utf-8');
+    const content = JSON.parse(componentsDefaultDataStr);
+    console.log(componentsDefaultDataStr);
     ctx.body = content;
   }
 }

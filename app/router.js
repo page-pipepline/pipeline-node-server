@@ -15,7 +15,9 @@ module.exports = app => {
   router.get('/pipeline/baseConfigSchema', controller.pipeline.getBaseConfigSchema);
   router.get('/pipeline/templateComponents', controller.pipeline.getTemplateComponents);
   router.put('/pipeline/templateComponents', controller.pipeline.putTemplateComponents);
+  router.get('/pipeline/libraryComponentsInfo', controller.pipeline.getLibraryComponentsInfo);
   router.get('/pipeline/componentsSchema', controller.pipeline.getComponentsSchema);
+  router.get('/pipeline/componentsDefaultData', controller.pipeline.getComponentsDefaultData);
 
   router.get('/', controller.home.index);
 };
