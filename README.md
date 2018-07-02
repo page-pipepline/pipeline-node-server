@@ -9,8 +9,7 @@
 
 ## 准备工作
 * 需要在该项目同级建立`pipeline-resources`目录.
-* 到`pipeline-template`项目中生成组件库压缩包`pipeline-library.zip`和模板压缩包`pipeline-template.zip`.
-* 添加组件库文件 `pipeline-resources/component-library/1/pipeline-library.zip`.(目前路径写死)
+* 到`pipeline-template`项目中生成模板压缩包`pipeline-template.zip`.
 * 添加模板文件 `pipeline-resources/template/1/pipeline-template.zip`.(目前路径写死)
 
 ## 启动

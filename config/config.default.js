@@ -46,7 +46,6 @@ module.exports = appInfo => {
   // 与 node 源码同一级
   const resourceBaseDir = path.join(__dirname, '..', '..', 'pipeline-resources');
   config.resourcesPath = {
-    componentLibraryDir: path.join(resourceBaseDir, 'component-library'),
     templateDir: path.join(resourceBaseDir, 'template'),
     pageDir: path.join(resourceBaseDir, 'page'),
   };

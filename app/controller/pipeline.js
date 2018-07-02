@@ -12,24 +12,22 @@ const path = require('path');
 const Controller = require('egg').Controller;
 
 // 将组件库源码放入页面工作管道
-const makePagepipelineComponentLibrary = async (context, templateId, pageId) => {
+const makePagePipelineTemplate = async (context, templateId, pageId) => {
   const { ctx, config } = context;
 
   // const template = await service.template.getTemplateById(templateId);
-  // TODO get componentLibrary by componentLibraryId
-  const componentLibrary = {
-    files: '/pipeline-resource/component-library/1/pipeline-library.zip',
+  const template = {
+    files: '/pipeline-resource/template/1/pipeline-template.zip',
   };
 
+  const templateZipFilePath = path.join(config.resourcesPath.templateDir,
+    template.files.replace('/pipeline-resource/template', ''));
   const pagepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId);
-  const componentLibrarypipelineDir = pagepipelineDir;
-
-  const componentLibraryZipFilePath = path.join(config.resourcesPath.componentLibraryDir,
-    componentLibrary.files.replace('/pipeline-resource/component-library', ''));
+  const templatepipelineDir = pagepipelineDir;
 
   await ctx.helper.execShell([
-    `mkdir -p ${componentLibrarypipelineDir}`,
-    `unzip -o ${componentLibraryZipFilePath} -d ${componentLibrarypipelineDir}` ]);
+    `mkdir -p ${templatepipelineDir}`,
+    `unzip -o ${templateZipFilePath} -d ${templatepipelineDir}` ]);
 };
 
 // 在页面工作管道备份模板(页面)配置数据
@@ -51,19 +49,9 @@ const copyTemplateConfig = async (context, pageId) => {
 
 // 基于模板构建页面工作管道
 const makePagepipelineFromTemplate = async (context, templateId, pageId) => {
-  const { ctx, config } = context;
+  const { ctx } = context;
 
-  const template = {
-    files: '/pipeline-resource/template/1/pipeline-template.zip',
-  };
-
-  const templateZipFilePath = path.join(config.resourcesPath.templateDir,
-    template.files.replace('/pipeline-resource/template', ''));
-  const pagepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId);
-  const templatepipelineDir = path.join(pagepipelineDir, 'server/config');
-
-  await makePagepipelineComponentLibrary(context, templateId, pageId);
-  await ctx.helper.execShell([ `unzip -o ${templateZipFilePath} -d ${templatepipelineDir}` ]);
+  await makePagePipelineTemplate(context, templateId, pageId);
   await copyTemplateConfig(context, pageId);
   await ctx.helper.execShell([
     `cd ./app/public/pipelines/${pageId}/server`,
@@ -81,7 +69,7 @@ const makePagepipelineFromPage = async (context, templateId, pageId) => {
   const pagepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId);
   const templatepipelineDir = path.join(pagepipelineDir, 'server/config');
 
-  await makePagepipelineComponentLibrary(context, templateId, pageId);
+  await makePagePipelineTemplate(context, templateId, pageId);
   await ctx.helper.execShell([ `unzip -o ${pageZipFilePath} -d ${templatepipelineDir}` ]);
   await copyTemplateConfig(context, pageId);
   await ctx.helper.execShell([
