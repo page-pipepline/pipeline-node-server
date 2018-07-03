@@ -31,6 +31,7 @@
   },
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-pipeline-node-server",
+    "docker-start": "egg-scripts start --title=egg-server-pipeline-node-server",
     "stop": "egg-scripts stop --title=egg-server-pipeline-node-server",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
