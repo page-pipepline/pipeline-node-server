@@ -24,6 +24,7 @@
     "eslint": "^4.11.0",
     "eslint-config-egg": "^6.0.0",
     "jsdoc": "^3.5.5",
+    "standard-version": "^4.4.0",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
@@ -41,7 +42,8 @@
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod"
+    "autod": "autod",
+    "release": "standard-version"
   },
   "ci": {
     "version": "8"
