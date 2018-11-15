@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/page-pipepline/pipeline-node-server/compare/v0.1.0...v0.2.0) (2018-11-15)
+
+
+### Features
+
+* add react SSR ([b29a83a](https://github.com/page-pipepline/pipeline-node-server/commit/b29a83a))
+* add support for database and template model ([07eaf94](https://github.com/page-pipepline/pipeline-node-server/commit/07eaf94))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2018-07-12)
 
