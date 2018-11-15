@@ -6,6 +6,9 @@
 module.exports = app => {
   const { router, controller } = app;
 
+  // 模板相关接口
+  app.resources('/templates', controller.templates);
+
   // 模板生成页面相关接口
   router.post('/pipeline/prepareFromTemplate', controller.pipeline.prepareFromTemplate);
   router.post('/pipeline/prepareFromPage', controller.pipeline.prepareFromPage);

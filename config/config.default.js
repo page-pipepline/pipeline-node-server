@@ -43,6 +43,27 @@ module.exports = appInfo => {
     credentials: true,
   };
 
+  // mongodb 连接
+  const modeConfig = {
+    mongo: {
+      user: 'mongouser',
+      password: encodeURIComponent('password'),
+      host: 'localhost',
+      port: '27017',
+      DB: 'pipeline',
+      authSource: 'admin',
+    },
+  };
+  config.mongoose = {
+    url: `mongodb://${modeConfig.mongo.user}:${modeConfig.mongo.password}@${modeConfig.mongo.host}:${modeConfig.mongo.port}/${modeConfig.mongo.DB}?authSource=${modeConfig.mongo.authSource}`,
+    options: {
+      poolSize: 16,
+      reconnectTries: Number.MAX_VALUE,
+      reconnectInterval: 500,
+      bufferMaxEntries: 0,
+    },
+  };
+
   // 与 node 源码同一级
   const resourceBaseDir = path.join(__dirname, '..', '..', 'pipeline-resources');
   config.resourcesPath = {

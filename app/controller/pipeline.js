@@ -13,15 +13,18 @@ const Controller = require('egg').Controller;
 
 // 将组件库源码放入页面工作管道
 const makePagePipelineTemplate = async (context, templateId, pageId) => {
-  const { ctx, config } = context;
+  const { ctx, config, service } = context;
 
-  // const template = await service.template.getTemplateById(templateId);
-  const template = {
-    files: '/pipeline-resource/template/1/pipeline-template.zip',
-  };
-
-  const templateZipFilePath = path.join(config.resourcesPath.templateDir,
-    template.files.replace('/pipeline-resource/template', ''));
+  const template = await service.db.queryTemplate({
+    conditions: {
+      id: templateId,
+    },
+  });
+  // const template = {
+  //   files: '/pipeline-resource/template/1/pipeline-template.zip',
+  // };
+  console.log('test', template, template.files, template.files);
+  const templateZipFilePath = path.join(config.resourcesPath.templateDir, template.files);
   const pagepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId);
   const templatepipelineDir = pagepipelineDir;
 
@@ -64,8 +67,7 @@ const makePagepipelineFromPage = async (context, templateId, pageId) => {
 
   const page = await service.page.getPageById(pageId);
 
-  const pageZipFilePath = path.join(config.resourcesPath.pageDir,
-    page.files.replace('/pipeline-resource/page', ''));
+  const pageZipFilePath = path.join(config.resourcesPath.pageDir, page.files);
   const pagepipelineDir = path.join(config.baseDir, 'app/public/pipelines', pageId);
   const templatepipelineDir = path.join(pagepipelineDir, 'server/config');
 
