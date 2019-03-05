@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const exec = require('child_process').exec;
+const generate = require('nanoid/generate');
 
 module.exports = {
   file: {
@@ -36,5 +37,24 @@ module.exports = {
         resolve(stdout);
       });
     });
+  },
+  upload: {
+    streamPromise: stream => new Promise((resolve, reject) => {
+      const data = [];
+      stream.on('data', chunk => {
+        data.push(chunk);
+      });
+      stream.on('end', () => {
+        resolve(Buffer.concat(data));
+      });
+      stream.on('error', e => {
+        reject(e);
+      });
+    }),
+  },
+  uuid: {
+    getUuid: () => {
+      return generate('01234567890', 16);
+    },
   },
 };

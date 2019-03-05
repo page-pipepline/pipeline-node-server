@@ -27,11 +27,25 @@ module.exports = app => {
     }
 
     async create() {
-      const { ctx, service } = this;
+      const { ctx, service, config } = this;
+
+      const id = Number(ctx.request.body.id);
+      const name = ctx.request.body.name;
+      const fileName = ctx.request.body.fileName;
+
+      const files = `${id}/${fileName}`;
+
+      // 移动文件到资源目录
+      await ctx.helper.execShell(`mkdir -p ${config.resourcesPath.templateDir}/${id}`);
+      await ctx.helper.execShell(`mv ${config.temporaryDir}/${files} ${config.resourcesPath.templateDir}/${id}`);
 
       const dbParams = {
         conditions: {},
-        payload: ctx.request.body,
+        payload: {
+          id,
+          name,
+          files,
+        },
       };
 
       const result = await service.db.createTemplate(dbParams);

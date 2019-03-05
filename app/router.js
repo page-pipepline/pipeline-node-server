@@ -22,5 +22,9 @@ module.exports = app => {
   router.get('/pipeline/componentsSchema', controller.pipeline.getComponentsSchema);
   router.get('/pipeline/componentsDefaultData', controller.pipeline.getComponentsDefaultData);
 
+  // 文件上传
+  router.post('/file/upload', controller.file.upload);
+
+
   router.get('/', controller.home.index);
 };

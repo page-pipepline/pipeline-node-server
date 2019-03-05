@@ -72,6 +72,7 @@ module.exports = appInfo => {
   };
 
   config.publicDir = path.join(__dirname, '..', 'app', 'public');
+  config.temporaryDir = path.join(__dirname, '..', 'app', 'public', 'temp');
 
   return config;
 };
