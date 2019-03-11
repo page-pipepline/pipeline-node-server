@@ -78,6 +78,11 @@ module.exports = app => {
       const result = await service.db.deleteTemplate(dbParams);
       ctx.body = result;
     }
+
+    async getTemplateId() {
+      const { ctx } = this;
+      ctx.body = ctx.helper.uuid.getUuid();
+    }
   }
 
   return TemplateController;
