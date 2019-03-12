@@ -32,12 +32,14 @@ module.exports = app => {
       const id = Number(ctx.request.body.id);
       const name = ctx.request.body.name;
       const fileName = ctx.request.body.fileName;
+      const imageName = ctx.request.body.imageName;
 
       const files = `${id}/${fileName}`;
+      const thumbnail = `${id}/${imageName}`;
 
       // 移动文件到资源目录
       await ctx.helper.execShell(`mkdir -p ${config.resourcesPath.templateDir}/${id}`);
-      await ctx.helper.execShell(`mv ${config.temporaryDir}/${files} ${config.resourcesPath.templateDir}/${id}`);
+      await ctx.helper.execShell(`mv ${config.temporaryDir}/${id}/* ${config.resourcesPath.templateDir}/${id}`);
 
       const dbParams = {
         conditions: {},
@@ -45,6 +47,7 @@ module.exports = app => {
           id,
           name,
           files,
+          thumbnail,
         },
       };
 

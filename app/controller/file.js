@@ -9,9 +9,8 @@ class File extends Controller {
   async upload() {
     const { ctx, config } = this;
 
-    const templateId = ctx.helper.uuid.getUuid();
-
     const stream = await ctx.getFileStream();
+    const templateId = stream.fields.templateId;
     const fileBuffer = await ctx.helper.upload.streamPromise(stream);
     const filePath = path.join(config.temporaryDir, templateId, stream.filename);
 
