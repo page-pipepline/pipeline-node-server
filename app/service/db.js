@@ -51,10 +51,6 @@ module.exports = app => {
       return query;
     }
     async createTemplate({ payload = {} }) {
-      // TODO: id 自增, 寻找不消耗时间的方式, 或者使用 _id
-      const count = await app.model.Template.count();
-      payload.id = count + 1;
-
       const newTemplate = new app.model.Template(payload);
       const query = await newTemplate.save()
         .catch(err => {
