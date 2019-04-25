@@ -14,6 +14,14 @@ module.exports = {
         resolve(stat);
       });
     }),
+    dir: path => new Promise((resolve, reject) => {
+      fs.readdir(path, (e, stat) => {
+        if (e instanceof Error) {
+          reject(e);
+        }
+        resolve(stat);
+      });
+    }),
   },
   execShell: function execShell(shellCommands = 'pwd') {
     const shellCommandArray = shellCommands instanceof Array ? shellCommands : [ shellCommands ];
@@ -54,7 +62,7 @@ module.exports = {
   },
   uuid: {
     getUuid: () => {
-      return generate('01234567890', 16);
+      return generate('01234567890', 8);
     },
   },
 };
